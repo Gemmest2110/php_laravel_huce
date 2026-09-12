@@ -2,45 +2,77 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SinhVien;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class SinhVienController extends Controller
 {
-    // Thêm dấu chấm phẩy (;) ở cuối mảng này
-    private $sinhviens = [
-        ['id' => 1, 'ten' => 'Nguyễn Văn A', 'lop' => '68PM34', 'diem' => 8],
-        ['id' => 2, 'ten' => 'Nguyễn Văn B', 'lop' => '68PM34', 'diem' => 5],
-        ['id' => 3, 'ten' => 'Nguyễn Văn C', 'lop' => '68PM34', 'diem' => 9],
-        ['id' => 4, 'ten' => 'Nguyễn Văn D', 'lop' => '68PM34', 'diem' => 7],
-        ['id' => 5, 'ten' => 'Nguyễn Văn E', 'lop' => '68PM34', 'diem' => 6],
-    ]; // <--- QUAN TRỌNG: Phải có dấu chấm phẩy ở đây
+    public function index(): View
+    {
+        $sinhviens = SinhVien::latest()->paginate(10);
 
-    public function index() {
-        return view('sinhvien.index', [
-            'title' => 'Danh sách sinh viên',
-            'description' => 'Trang danh sách sinh viên',
-            'sinhviens' => $this->sinhviens
-        ]);
+        return view('sinhvien.index', compact('sinhviens'));
     }
 
-    public function show($id = "") {
-        // get sinh vien theo id
-        $sinhvien = collect($this->sinhviens)->firstWhere('id', $id);
-        return view('sinhvien.show', [
-            'title' => 'Thông tin sinh viên',
-            'description' => 'Trang thông tin sinh viên',
-            'sinhvien' => $sinhvien
-        ]);
+    public function create(): View
+    {
+        return view('sinhvien.create');
     }
 
-    public function create() {
-        return view('sinhvien.create', [
-            'title' => 'Thêm sinh viên',
-            'description' => 'Trang thêm sinh viên'
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'age' => ['required', 'integer', 'min:1', 'max:150'],
+            'email' => ['required', 'email', 'max:255', 'unique:sinh_viens,email'],
         ]);
+
+        SinhVien::create($validated);
+
+        return redirect()
+            ->route('sinhvien.index')
+            ->with('success', 'Sinh viên mới đã được thêm thành công.');
     }
 
-    public function store(Request $request) {
-        dd($request->all());
+    public function show(SinhVien $sinhvien): View
+    {
+        return view('sinhvien.show', compact('sinhvien'));
+    }
+
+    public function edit(SinhVien $sinhvien): View
+    {
+        return view('sinhvien.edit', compact('sinhvien'));
+    }
+
+    public function update(Request $request, SinhVien $sinhvien): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'age' => ['required', 'integer', 'min:1', 'max:150'],
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('sinh_viens', 'email')->ignore($sinhvien),
+            ],
+        ]);
+
+        $sinhvien->update($validated);
+
+        return redirect()
+            ->route('sinhvien.index')
+            ->with('success', 'Thông tin sinh viên đã được cập nhật.');
+    }
+
+    public function destroy(SinhVien $sinhvien): RedirectResponse
+    {
+        $sinhvien->delete();
+
+        return redirect()
+            ->route('sinhvien.index')
+            ->with('success', 'Sinh viên đã được xóa.');
     }
 }

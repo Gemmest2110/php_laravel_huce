@@ -75,6 +75,37 @@
       font-family: Consolas, monospace; font-size: 13px; color: #8a4b1f;
     }
 
+    .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 18px; }
+    .toolbar h2 { margin: 0; border: 0; padding: 0; }
+    .btn { display: inline-block; padding: 9px 15px; border: 0; border-radius: 4px; text-decoration: none; cursor: pointer; font: inherit; }
+    .btn-primary { color: #fff; background: var(--mau-phu); }
+    .btn-primary:hover { background: var(--mau-chinh); }
+    .btn-secondary { color: var(--mau-chinh); background: #efebf5; }
+    .table-wrapper { overflow-x: auto; }
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th, .data-table td { padding: 11px; text-align: left; border-bottom: 1px solid var(--mau-vien); }
+    .data-table th { color: #fff; background: var(--mau-phu); }
+    .data-table tbody tr:hover { background: #f7f5fa; }
+    .actions { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+    .actions form { display: inline; margin: 0; }
+    .actions a, .link-danger { border: 0; padding: 0; background: none; color: var(--mau-phu); text-decoration: underline; cursor: pointer; font: inherit; }
+    .link-danger { color: #b42318; }
+    .empty-state { text-align: center !important; color: #7a7290; }
+    .alert { padding: 12px 14px; margin-bottom: 16px; border-radius: 4px; }
+    .alert-success { color: #166534; background: #dcfce7; }
+    .alert-error { color: #991b1b; background: #fee2e2; }
+    .alert ul { margin: 6px 0 0 20px; }
+    .form-card { max-width: 620px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: var(--mau-chinh); }
+    .form-group input { width: 100%; padding: 10px 12px; border: 1px solid var(--mau-vien); border-radius: 4px; font: inherit; }
+    .form-group input:focus { outline: 2px solid var(--mau-nhan); border-color: transparent; }
+    .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+    .detail-list { max-width: 620px; }
+    .detail-list div { display: grid; grid-template-columns: 140px 1fr; border-bottom: 1px solid var(--mau-vien); padding: 11px 0; }
+    .detail-list dt { font-weight: 600; color: var(--mau-chinh); }
+    .pagination-wrapper { margin-top: 18px; }
+
     /* ---------- RESPONSIVE ----------
        Với Flexbox phải đổi flex-direction của .than-trang từ row sang
        column, đồng thời chỉnh lại flex-basis của sidebar. So với Grid
@@ -96,6 +127,9 @@
         padding: 8px 14px;
       }
       .menu-doc a:hover { padding-left: 14px; }
+      .toolbar { align-items: flex-start; flex-direction: column; }
+      .actions { align-items: flex-start; flex-direction: column; }
+      .detail-list div { grid-template-columns: 1fr; gap: 4px; }
     }
   </style>
 

@@ -1,0 +1,24 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('lop_hocs', function (Blueprint $table) {
+            $table->id();
+            $table->string('tenlop');
+            $table->unsignedInteger('siso');
+            $table->string('giaovien');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('lop_hocs');
+    }
+};

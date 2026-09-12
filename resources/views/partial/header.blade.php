@@ -30,8 +30,8 @@
     <div class="logo">HUCE<span>.Web</span></div>
     <nav aria-label="Điều hướng chính">
         <ul class="menu-ngang">
-            <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Trang chủ</a></li>
-            <li><a href="{{ url('/sinhvien') }}" class="{{ request()->is('sinhvien') ? 'active' : '' }}">Sinh viên</a></li>
+            <li><a href="{{ route('sinhvien.index') }}" class="{{ request()->routeIs('sinhvien.*') ? 'active' : '' }}">Sinh viên</a></li>
+            <li><a href="{{ route('lophoc.index') }}" class="{{ request()->routeIs('lophoc.*') ? 'active' : '' }}">Lớp học</a></li>
             <li><a href="#footer">Liên hệ</a></li>
         </ul>
     </nav>
