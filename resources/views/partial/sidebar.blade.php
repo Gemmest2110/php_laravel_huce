@@ -33,18 +33,14 @@
 </style>
 @endpush
 <aside class="sidebar">
-    <h3>Nội dung môn học</h3>
+    <h3>Quản lý dữ liệu</h3>
     <ul class="menu-doc">
-        <li><a href="#">Bài 1 — HTML cơ bản</a></li>
-        <li><a href="#">Bài 2 — CSS Selector</a></li>
-        <li><a href="#">Bài 3 — Box Model</a></li>
-        <li><a href="#" class="active">Bài 4 — Flexbox</a></li>
-        <li><a href="#">Bài 5 — CSS Grid</a></li>
-        <li><a href="#">Bài 6 — Responsive</a></li>
+        <li><a href="{{ route('sinhvien.index') }}" class="{{ request()->routeIs('sinhvien.*') ? 'active' : '' }}">Sinh viên</a></li>
+        <li><a href="{{ route('lophoc.index') }}" class="{{ request()->routeIs('lophoc.*') ? 'active' : '' }}">Lớp học</a></li>
     </ul>
-    <h3>Tài nguyên</h3>
+    <h3>Thao tác nhanh</h3>
     <ul class="menu-doc">
-        <li><a href="#">Slide bài giảng</a></li>
-        <li><a href="#">Mã nguồn demo</a></li>
+        <li><a href="{{ route('sinhvien.create') }}">Thêm sinh viên</a></li>
+        <li><a href="{{ route('lophoc.create') }}">Thêm lớp học</a></li>
     </ul>
 </aside>

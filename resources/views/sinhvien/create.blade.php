@@ -1,18 +1,18 @@
 @extends('layoutmaster')
 
-@section('title', $title)
-@section('description', $description)
+@section('title', 'Thêm sinh viên')
+@section('description', 'Nhập thông tin sinh viên mới')
 
 @section('content')
-    <p>Xin chào các bạn sinh viên</p>
-    <form action='/sinhvien/store' method='post'>
+    @include('partial.errors')
+
+    <form class="form-card" action="{{ route('sinhvien.store') }}" method="POST">
         @csrf
-        <label for="ten">Tên:</label>
-        <input type="text" id="ten" name="ten">
-        <label for="lop">Lớp:</label>
-        <input type="text" id="lop" name="lop">
-        <label for="diem">Điểm:</label>
-        <input type="number" id="diem" name="diem" step="0.01" min="0" max="10">
-        <input type="submit" value="Thêm sinh viên">
+        @include('sinhvien.form')
+
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Thêm sinh viên</button>
+            <a class="btn btn-secondary" href="{{ route('sinhvien.index') }}">Hủy</a>
+        </div>
     </form>
 @endsection
